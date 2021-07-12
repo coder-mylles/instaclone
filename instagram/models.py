@@ -17,4 +17,13 @@ class Profile(models.Model):
             Profile.objects.create(user=instance)
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+         instance.profile.save()
+
+
+class Post(models.Model):
+    image = models.ImageField(upload_to='posts/')
+    caption = models.CharField(max_length=250)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts')
+
+    class Meta:
+        ordering = ["-pk"]
