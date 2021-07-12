@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateUserForm, UpdateUserProfileForm
 from django.contrib.auth import login, authenticate
 
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
@@ -23,12 +22,13 @@ def signup(request):
 def index(request):
     return render(request, 'instagram/index.html')
 
+@login_required(login_url='login')
+def profile(request, username):
+    user_form = UpdateUserForm()
+    prof_form = UpdateUserProfileForm()
+    params = {
+        'user_form': user_form,
+        'prof_form': prof_form,
 
-@login_required
-def profile(request):
-    return render(request, 'instagram/profile.html')
-
-@login_required
-def profile(request):
-    user = request.user
-    return render(request, 'instagram/profile.html',{'user':user})
+    }
+    return render(request, 'instagram/profile.html', params)
