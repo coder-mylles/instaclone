@@ -22,13 +22,15 @@ def signup(request):
 def index(request):
     return render(request, 'instagram/index.html')
 
-@login_required(login_url='login')
-def profile(request, username):
-    user_form = UpdateUserForm()
-    prof_form = UpdateUserProfileForm()
-    params = {
-        'user_form': user_form,
-        'prof_form': prof_form,
-
-    }
-    return render(request, 'instagram/profile.html', params)
+from django.urls import path, include
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+urlpatterns = [
+    path('signup/', views.signup, name='signup'),
+    path('account/', include('django.contrib.auth.urls')),
+    path('', views.index, name='index'),
+    path('profile/<username>/', views.profile, name='profile'),
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
