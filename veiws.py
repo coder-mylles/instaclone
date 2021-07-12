@@ -22,3 +22,8 @@ def signup(request):
 @login_required(login_url='login')
 def index(request):
     return render(request, 'instagram/index.html')
+
+
+@login_required
+def profile(request):
+    return render(request, 'instagram/profile.html')
