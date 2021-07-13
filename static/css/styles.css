@@ -37,9 +37,8 @@ h1{
 }
 .instaglyph{
     display: inline-block;
-    background-image: url(/static/img/868a059b8fc8.png);
-    margin: 8px;
-
+    background-image: url(/static/images/868a059b8fc8.png);
+    margin:8px;
 }
 .modal-body a{
     text-decoration:none;
@@ -80,7 +79,6 @@ h1{
 body{
     background-color:#f9f9f9;
 }
-
 .account-img {
     height: 165px;
     width: 165px;
@@ -94,4 +92,10 @@ body{
 .card-body{
     margin:0px;
     padding:0px;
+}
+.user{
+    color:black;
+}
+.user a:hover{
+    text-decoration:none;
 }
